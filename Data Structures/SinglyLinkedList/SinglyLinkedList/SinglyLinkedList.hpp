@@ -17,6 +17,7 @@ class SinglyLinkedList
 private:
     SLL_Node* head;
     SLL_Node* tail;
+    
     void free();
     void copy(const SinglyLinkedList&);
 public:

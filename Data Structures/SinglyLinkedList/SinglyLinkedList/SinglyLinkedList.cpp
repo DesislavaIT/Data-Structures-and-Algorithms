@@ -22,9 +22,9 @@ void SinglyLinkedList::free()
     }
 }
 
-void SinglyLinkedList::copy(const SinglyLinkedList& other)
+void SinglyLinkedList::copy(const SinglyLinkedList& rhs)
 {
-    SLL_Node* node = other.head;
+    SLL_Node* node = rhs.head;
     while(node != nullptr)
     {
         AddAtEnd(node->value);
@@ -38,17 +38,17 @@ SinglyLinkedList::SinglyLinkedList()
     tail = nullptr;
 }
 
-SinglyLinkedList::SinglyLinkedList(const SinglyLinkedList& other)
+SinglyLinkedList::SinglyLinkedList(const SinglyLinkedList& rhs)
 {
-    copy(other);
+    copy(rhs);
 }
 
-SinglyLinkedList& SinglyLinkedList::operator=(const SinglyLinkedList& other)
+SinglyLinkedList& SinglyLinkedList::operator=(const SinglyLinkedList& rhs)
 {
-    if (this != &other)
+    if (this != &rhs)
     {
         free();
-        copy(other);
+        copy(rhs);
     }
     
     return *this;
@@ -270,4 +270,13 @@ bool SinglyLinkedList::Search(int data) const
     }
     
     return false;
+}
+
+int main() {
+    SinglyLinkedList l;
+    l.AddAtPosition(0, 0);
+    l.AddAtPosition(1, 1);
+    l.AddAtPosition(2, 2);
+    l.AddAtPosition(3, 3);
+    l.Print();
 }

@@ -293,8 +293,71 @@ void MaximumSpanningTree() //medium
     
     cout << sum;
 }
+//new problem
+bool DFS(const vector<vector<int>>& graph, int v, vector<bool>& visited, set<int>& s)
+{
+    visited[v] = true;
+    s.insert(v);
+    bool result = false;
+    for(int i = 0; i < graph[v].size(); i++)
+    {
+        if(s.find(graph[v][i]) != s.end())
+        {
+            return true;
+        }
+        
+        if(!visited[graph[v][i]])
+        {
+            if(DFS(graph, graph[v][i], visited, s))
+            {
+                result = true;
+                break;
+            }
+        }
+    }
+    
+    s.erase(v);
+    return result;
+}
+
+void CycleInDirectedGraph() //medium
+{
+    int N;
+    cin >> N;
+    for(int j = 0; j < N; j++)
+    {
+        int V, E;
+        cin >> V >> E;
+        vector<vector<int>> graph(V);
+        for(int i = 0; i < E; i++)
+        {
+            int x, y, w;
+            cin >> x >> y >> w;
+            x--;
+            y--;
+            graph[x].push_back(y);
+        }
+        
+        vector<bool> visited(V, false);
+        bool result = false;
+        set<int> s;
+        for(int i = 0; i < V; i++)
+        {
+            if(!visited[i])
+            {
+                if(DFS(graph, i, visited, s))
+                {
+                    result = true;
+                    break;
+                }
+            }
+        }
+        
+        cout << (result ? "true" : "false") << ' ';
+    }
+}
 
 int main() {
-    MaximumSpanningTree();
+    CycleInDirectedGraph();
     return 0;
 }
